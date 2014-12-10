@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+
+    <menuitem id="menu_openacademy_main" name="OpenAcademy"/>
+    <menuitem id="menu_openacademy_all" name="openAcademy" parent="menu_openacademy_main"/>
+    <!--Course tree-View-->
+    <record model="ir.ui.view" id="view_openacademy_course_tree">
+        <field name="name">openacademy.course.tree</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <tree string="Course">
+                <field name="name"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+    <!--Session tree-View-->
+    <record model="ir.ui.view" id="view_openacademy_session_tree">
+        <field name="name">openacademy.session.tree</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <tree string="Session">
+                <field name="name"/>
+                <field name="instructor"/>
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="seats"/>
+                <field name="remaining_seats" widget="progressbar"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!--Course Form-->
+    <record model="ir.ui.view" id="view_openacademy_course_form">
+        <field name="name">openacademy.course.form</field>
+        <field name="model">openacademy.course</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Course">
+                <sheet>
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <field name="responsible_id"/>
+                        <field name="attendee_count"/>
+                    </group>
+                    <notebook>
+                        <page string="Session">
+                            <field name="session_ids">
+                                <tree string="Session">
+                                    <field name="name"/>
+                                    <field name="instructor"/>
+                                    <field name="seats"/>
+                                    <field name="start_date"/>
+                                    <field name="duration"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form string="Session">
+                                    <header>
+                                        <field name="state" widget="statusbar" statusbar_visible="draft,rejected,confirm,done"/>
+                                    </header>
+                                    <sheet>
+                                        <label for="name" class="oe_edit_only"/>
+                                        <h1><field name="name" placeholder="Title"/></h1>
+                                        <group>
+                                            <group>
+                                                <field name="instructor"/>
+                                                <field name="seats"/>
+                                                <field name="attendee_count"/>
+                                            </group>
+                                            <group>
+                                                <field name="start_date"/>
+                                                <field name="duration"/>
+                                                <field name="remaining_seats" widget="progressbar"/>
+                                            </group>
+                                        </group>
+                                        <field name="attendee_ids"/>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Session Form-->
+    <record model="ir.ui.view" id="view_openacademy_session_form">
+        <field name="name">openacademy.session.form</field>
+        <field name="model">openacademy.session</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Session">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                </header>
+                <sheet>
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name" placeholder="Title"/></h1>
+                    <group>
+                        <group>
+                            <field name="instructor"/>
+                            <field name="seats"/>
+                            <field name="attendee_count"/>
+                            <field name="partner_email"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="remaining_seats" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <field name="attendee_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Course action-->
+    <record model="ir.actions.act_window" id="action_openacademy_course">
+        <field name="name">Course</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--Session action-->
+    <record model="ir.actions.act_window" id="action_openacademy_session">
+        <field name="name">Session</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="menu_openacademy_course" name="Course" parent="menu_openacademy_all" action="action_openacademy_course"/>
+    <menuitem id="menu_openacademy_session" name="Session" parent="menu_openacademy_all" action="action_openacademy_session"/>
+
+    </data>
+</openerp>
+
