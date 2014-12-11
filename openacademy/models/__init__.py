@@ -1,1 +1,1 @@
-import openacademy
+import openacademy,res_partner
