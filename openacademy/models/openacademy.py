@@ -30,7 +30,7 @@ class openacademy_course(models.Model):
     #one course has multiple sessions
     session_ids = fields.One2many('openacademy.session','course_id')
     attendee_count = fields.Integer(compute='get_attendee_count',string='No of Attendees',store=True)
-
+    image= fields.Binary()
     #this is python constraint
     @api.one
     @api.constrains('name','description')

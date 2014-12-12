@@ -1,0 +1,157 @@
+<openerp>
+    <data>
+        
+            <template id="simple_page">
+                <t t-call="website.layout">
+                    <div class="container">
+                        <h1>Hello World</h1>
+                    </div>
+                </t>
+            </template>
+            <template id="dynamic_page">
+                <t t-call="website.layout">
+                    <div class="container">
+                        <h1>Hello <t t-esc="user.name"/></h1>
+                    </div>
+                </t>
+            </template>
+            <template id="openacademy_course">
+                <t t-call="website.layout">
+                    <div class="container">
+
+                        <div class="row">
+                            <t t-foreach="courses" t-as="course">
+                                
+                                <div class="col-md3">
+                                    <div class="panel panel-primary">
+                                        <span t-field="course.name"/>
+                                    </div>
+                                    <div class="panel-body">
+                                        <img class="img img_responsive_shadow" t-att-src="'/website/image?model=openacademy.course&amp;field=image&amp;id='+str(course.id)"/>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <p class="text-center">Responsible:<span t-field="course.responsible_id.name"/></p>
+                                        <a class="btn btn-primary" href="/openacademy/course/#{course.id}">See detail</a>
+                                    </div>
+                                </div>
+
+                            </t>
+                        </div>
+
+                    </div>
+                </t>
+            </template>
+
+            <template id="openacademy_course_details">
+                <t t-call="website.layout">
+                    <div class="container">
+                        <div class="row">
+                            <h1 class="text-center">Session Information for<span t-field="course.name"/>
+                            </h1>
+                            <t t-foreach="course.session_ids" t-as="session">
+                                <div class="col-md-3">
+                                    <t t-if="session.state =='delay'">
+                                        <span class="label label-warning">
+                                            <i class="fa fa-file-text"></i>
+                                            <span t-field="session.name"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-md-6">
+                                    <t t-if="session.state == 'confirm'">
+                                        <span class="label label-info">
+                                            <i class="fa fa-user"></i>
+                                            <span t-field="sesion.name"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="col-md-3">
+                                    <t t-if="session.state=='done'">
+                                        <span class="label label-success">
+                                            <i class="fa fa-user"></i>
+                                            <span t-field="session.name"/>
+                                        </span>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </template>
+
+            <template id="openacademy_footer_inherit" inherit_id="website.footer_default">
+                <xpath expr="//div[@id='info']/ul" position="inside">
+                    <li><a href="openacademy/course">Open Academy Course</a></li>
+                </xpath>
+            </template>
+            
+            <!--Snippet structure-->
+            
+            <template id="openacademy_snippets" inherit_id="website.snippets">
+                <xpath expr="//div[@id='snippet_structure']" position="inside">
+                    <div>
+                        <div class="oe_snippet_thumbnail">
+                            <img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_image_text.png"/>
+                            <span class="oe_snippet_thumbnail_title">OpenAcademy</span>
+                        </div>
+                        <section class="oe_snippet_body">
+                            <div class="container">
+                            <div class="row">
+                                 <div clas="col-md-3">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h1>Session Pricing</h1>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h2 class="text-center">
+                                                <span>$</span>
+                                                <b style="font-size:59px;">59</b>
+                                                <small>0.00</small>
+                                            </h2>
+                                            <div class="text-center">Per person</div>
+                                        </div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item text-center">Learn From Professional</li>
+                                            <li class="list-group-item text-center">Learn New Things</li>
+                                            <li class="list-group-item text-center">Limited Seats</li>
+                                        </ul>
+                                        <div class="panel-footer">
+                                            <a class="btn btn-primary" href="/page/website.contactus"> Order Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-md-6">
+                                        <img class="img img-responsive.shadow" src="/website/static/src/img/image_text.jpg"/>
+                                        <span>Limited Offer</span>
+                                    </div>
+                                <div class="col-md=3">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heding">
+                                            <h1>Session Pricing</h1>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h2>
+                                                <span>$</span>
+                                                <b style="font=size:59px;">59</b><br/>
+                                                <small>0.00</small>
+                                            </h2>
+                                            <div>Per Person</div>
+                                        </div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item text-center">Learn From Professional</li>
+                                            <li class="list-group-item text-center">Learn New Things</li>
+                                            <li class="list-group-item text-center">Limited Seats</li>
+                                        </ul>
+                                        <div class="panel-footer">
+                                            <a class="btn btn-primary" href="/page/website.contactus">Order Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </section>
+                        </div>
+                    </xpath>
+                </template>
+    </data>
+</openerp>

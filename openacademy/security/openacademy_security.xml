@@ -1,0 +1,17 @@
+<openerp>
+    <data>
+        <record model="ir.module.category" id="category_openacademy">
+            <field name="name">OpenAcademy</field>
+        </record>
+
+        <record model="res.groups" id="group_manager">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="category_openacademy">
+        </record>
+
+        <record model="res.groups" id="group_user">
+            <field name="name">Users</field>
+            <field name="category_id" ref="category_openacademy">
+        </record>
+    </data>
+</openerp>

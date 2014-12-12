@@ -103,6 +103,7 @@
                     <button name="cancel" string="Cancel" states="confirm,delay" class="oe_highlight"/>
                     <button name="delay" string="Delay" states="confirm" class="oe_highlight"/>
                     <button name="done" string="Done" states="confirm" class="oe_highlight"/>
+                    <button name="%(openacademy.action_wiz_openacademy)d" type="action" string="Register Attendee" states="confirm" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <label for="name" class="oe_edit_only"/>

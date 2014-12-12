@@ -9,8 +9,16 @@
         - etcetera
     ''',
     'category':'Extra Tool',
-    'depends':['base','mail'],
-    'data':['views/openacademy_view.xml','views/res_partner_view.xml','views/openacademy_workflow.xml'],
+    'depends':['base','mail','website'],
+    'data':['wizard/wiz_openacademy_view.xml',
+            'views/openacademy_view.xml',
+            'views/res_partner_view.xml',
+            'views/openacademy_workflow.xml',
+            'views/openacademy_templates.xml',
+            'views/report_session.xml',
+            'security/openacademy_security.xml',
+            'security/ir.model.access.csv'],
+
     'website': 'super-odoo.com',
     'installable':True
 }
