@@ -231,7 +231,7 @@
 					<field name="instructor_id"/>
 					<field name="course_id"/>
 					<filter string="Confirm" name="confirm" domain="[('state','=','confirm')]"/>
-					<filter string="done" domain="[('state','=','done')]"/>
+					<filter string="Done" name="done" domain="[('state','=','done')]"/>
 					<group string="Group By...">
 						<filter string="Instructor" name="instructor" domain="[]" context="{'group_by': 'instructor_id'}"/>
 						<filter string="Course" domain="[]" context="{'group_by': 'course_id'}"/>
@@ -299,11 +299,22 @@
 			<field name="res_model">openacademy.session</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form,calendar,gantt,graph</field>
-			<field name="context">{'search_default_confirm': 1, 'search_default_instructor': 1}</field>
-			<field name="domain">[('state','=','confirm')]</field>
+			<field name="context">{'search_default_confirm': 1, 'search_default_done': 1}</field>
+			<field name="domain">[('state','in',['done','confirm'])]</field>
 		</record>
 
+		<!-- Session Action for unconfirmed sessions -->
+		<record model="ir.actions.act_window" id="action_openacademy_session_unconfirmed">
+			<field name="name">Unconfirmed Session</field>
+			<field name="res_model">openacademy.session</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form,calendar,gantt,graph</field>
+			<field name="context">{'search_default_instructor': 1}</field>
+			<field name="domain">[('state','not in',['done','confirm'])]</field>
+		</record>
 		<menuitem id="menu_openacademy_session" name="Session" parent="menu_openacademy_all" action="action_openacademy_session"/>
+		<!-- only user belong to manager group can see this menu -->
+		<menuitem id="menu_openacademy_session_unconfirmed" name="Unconfirmed Session" parent="menu_openacademy_all" groups="openacademy.group_manager" action="action_openacademy_session_unconfirmed"/>
 
 
 	</data>

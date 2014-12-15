@@ -102,7 +102,8 @@
 <!--Snippets structure-->
 
 	<template id="openacademy_snippets" inherit_id="website.snippets">
-		<xpath expr="//div[@id='snippet_structure']" position="inside">
+		<!--find div with id 'snippet_content' and place something inside it -->
+		<xpath expr="//div[@id='snippet_content']" position="inside">
 			<div>
 				<div class="oe_snippet_thumbnail">
 					<img class="oe_snippet_thumbnail_img" src="/website/static/src/img/blocks/block_image_text.png"/>

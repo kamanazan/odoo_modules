@@ -134,7 +134,8 @@ class openacademy_session(models.Model):
 
 	@api.model
 	def _needaction_domain_get(self):
-		return [('state','=','confirm')]
+        #Display the number of items in done and confirm state
+		return [('state','in',['confirm','done'])]
 
 
 class openacademy_attendee(models.Model):
@@ -142,7 +143,7 @@ class openacademy_attendee(models.Model):
 	_description = 'Attendee'
 	_rec_name = 'partner_id'
 
-	partner_id = fields.Many2one('res.partner', string='Attendee')
+	partner_id = fields.Many2one('res.partner', string='Attendee',domain=[('instructor','=',False)])
 	session_id = fields.Many2one('openacademy.session', string="Session")
 
 	_sql_constraints = [('partner_session_unique', 'unique(partner_id,session_id)','Attendee must be unique for one session!!')]

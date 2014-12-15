@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<template id="report_all">
+			<t t-call="report.html_container">
+                <t t-foreach="docs" t-as="course">
+                    <t t-call="report.internal_layout">
+                        <div class="page">
+                           <h1 class="text-center">Course Details</h1>
+                                <div class="text-center">
+                                    <h3>
+                                        <i class="fa fa-file-text"></i>Course Name:<span t-field="course.name"/>
+                                        <i class="fa fa-user"></i>Responsible:<span t-field="course.responsible_id"/>
+                                        <i class="fa fa-file-text"></i>Course Description:<span t-fiel="course.description"/>
+                                    </h3>
+                                </div>
+                                    <t t-foreach="course.session_ids" t-as="session">
+                                        <h1 class="text-center">Session Details</h1>
+                                        <div class="text-center">
+                                            <h3>
+                                                <i class="fa fa-user"></i>Instructor :<span t-field="session.instructor_id.name"/>
+                                                <i class="fa fa-file-text"></i>Course:<span t-field="session.course_id.name"/>
+                                            </h3>
+                                            <h4>
+                                                <i class="fa fa-calendar"></i><span
+                                                t-field="session.start_date"/>
+                                                <i class="fa fa-clock-o"></i><span
+                                                t-field="session.duration"/>
+
+                                            </h4>
+                                            <div class="text-center">
+                                                <span t-field="session.instructor_id.email"/>
+                                            </div>
+
+                                        </div>
+                                        <t t-if="session.attendee_ids">
+                                            <h1 class="text-center">Attendee Details</h1>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Name
+                                                        </th>
+                                                        <th>
+                                                            Phone
+                                                        </th>
+                                                        <th>
+                                                            Present
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr t-foreach="session.attendee_ids" t-as="attendee">
+                                                        <td>
+                                                            <span t-field="attendee.partner_id.name"/>
+
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="attendee.partner_id.phone"/>
+                                                        </td>
+                                                        <td>
+                                                            <i class="fa fa-square-o"></i>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </t>
+                                    </t>
+                            
+                        </div>
+                    </t>
+                </t>
+			</t>
+		</template>
+
+
+		<report id="report_course_detail"
+			model="openacademy.course"
+			string="Course Details"
+			report_type="qweb-pdf"
+			file="openacademy.report_all"
+			name="openacademy.report_all"/>
+
+	</data>
+</openerp>
