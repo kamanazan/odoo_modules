@@ -1,29 +1,32 @@
+<?xml version="1.0"?>
 <openerp>
-    <data>
-        <record model="ir.ui.view" id="wiz_openacademy">
-            <field name="name">wiz.openacademy.form</field>
-            <field name="model">wiz.openacademy</field>
-            <field name="arch" type="xml">
-                <form string="Wizard session">
-                    <group>
-                        <field name="session_id"/>
-                    </group>
-                    <field name="attendee_ids"/>
-                    <footer>
-                        <button name="create_attendee" string="Register Attendee" type="object" class="oe_highlight"/>
-                        or
-                        <button class="oe_link" special="cancel" string="Cancel"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
+	<data>
 
-        <record model="ir.actions.act_window" id="action_wiz_openacademy">
-            <field name="name">Session Wizard</field>
-            <field name="res_model">wiz.openacademy</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
-    </data>
+		<record model="ir.ui.view" id="wiz_openacademy">
+			<field name="name">wiz.openacademy.form</field>
+			<field name="model">wiz.openacademy</field>
+			<field name="arch" type="xml">
+				<form string="Wizard session">
+					<group>
+						<field name="session_id"/>
+					</group>
+					<field name="attendee_ids"/>
+					<footer>
+						<button name="create_attendee" string="Register Attendee" type="object" class="oe_highlight"/>
+						or
+						<button class="oe_link" special="cancel" string="Cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_wiz_openacademy">
+			<field name="name">Session Wizard</field>
+			<field name="res_model">wiz.openacademy</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+	</data>
 </openerp>

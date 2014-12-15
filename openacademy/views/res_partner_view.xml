@@ -1,23 +1,27 @@
+<?xml version="1.0"?>
 <openerp>
-    <data>
-        <record model="ir.ui.view" id="res_partner_inherit_form">
-            <field name="name">partner.inherit.form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <data>
-                    <field name="fax" position ="attributes">
-                        <attribute name="invisible">True</attribute>
-                    </field>
-                    <page name="sales_purchases" position="after">
-                        <page string="instructor">
-                            <group>
-                                <field name="instructor"/>
-                            </group>
-                        </page>
-                    </page>
-                </data>
-            </field>
-        </record>
-    </data>
+	<data>
+
+		<record model="ir.ui.view" id="view_partner_inherit_form">
+			<field name="name">partner.inherit.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="priority" eval="10"/>
+			<field name="arch" type="xml">
+				<data>
+					<field name="fax" position="attributes">
+						<attribute name="invisible">True</attribute>
+					</field>
+					<page name="sales_purchases" position="after">
+						<page string="instructor">
+							<group>
+								<field name="instructor"/>
+							</group>
+						</page>
+					</page>
+				</data>
+			</field>
+		</record>
+
+	</data>
 </openerp>

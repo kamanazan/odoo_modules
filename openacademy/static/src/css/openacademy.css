@@ -1,0 +1,5 @@
+.openerp .oe_margin {
+    display: block;
+    position: relative;
+    margin: 12px;
+}
