@@ -28,5 +28,5 @@ class wiz_openacademy_attendee(models.TransientModel):
 	_name = "wiz.openacademy.attendee"
 	_rec_name = 'partner_id'
 
-	partner_id = fields.Many2one('res.partner', string="Partner")
+	partner_id = fields.Many2one('res.partner', string="Partner",domain=[('instructor','=',False)])
 	wiz_id = fields.Many2one('wiz.openacademy', string="Wizard")
