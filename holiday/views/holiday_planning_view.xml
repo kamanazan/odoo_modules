@@ -6,27 +6,32 @@
         <field name="model">holiday.planning</field>
         <field name="arch" type="xml">
             <form string="Day-off Planning">
+                <h1>
+                    <button name="applied" string="Apply" status="draft" class="oe_highligt"/>
+                    <button name="edit" string="Edit" status="apply" class="oe_highligt"/>
+                </h1>
                 <sheet>
                     <group>
-                    <group>
-                        <field name="name"/>
-                        <field name="default_type"/>
-                        <group col="3" colspan="2">
-                            <group>
-                                <field name="global_start_period" string="Global Period"/>
-                            </group>
-                            <group>
-                                <field name="global_end_period" nolabel="1"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="default_type"/>
+                            <group col="3" colspan="2">
+                                <group>
+                                    <field name="global_start_period" string="Global Period"/>
+                                </group>
+                                <group>
+                                    <field name="global_end_period" nolabel="1"/>
+                                </group>
                             </group>
                         </group>
+                        <group>
+                            <field name="mode_type"/>
+                            <field name="employee_tag" attrs="{'invisible':[('mode_type','=','employee')]}"/>
+                            <field name="employee_name" attrs="{'invisible':[('mode_type','=','tag')]}"/>
+                            <field name="company_id"/>
+                            <field name="last_apply"/>
+                        </group>
                     </group>
-                    <group>
-                        <field name="mode_type"/>
-                        <field name="employee_tag" attrs="{'invisible':[('mode_type','=','employee')]}"/>
-                        <field name="employee_name" attrs="{'invisible':[('mode_type','=','tag')]}"/>
-                        <field name="company_id"/>
-                    </group>
-                </group>
                 <field name="detail_ids">
                     <tree string="Details">
                         <field name="start_period"/>
@@ -47,6 +52,11 @@
         <field name="arch" type="xml">
             <tree string="Day-off Planning">
                 <field name="name"/>
+                <field name="global_start_period"/>
+                <field name="global_end_period"/>
+                <field name="mode_type"/>
+                <field name="default_type"/>
+                <field name="last_apply"/>
             </tree>
         </field>
     </record>

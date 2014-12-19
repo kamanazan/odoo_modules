@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="workflow" id="wkf_holiday_planning">
+            <field name="name">holiday.planning.workflow</field>
+            <field name="osv">holiday.planning</field>
+            <field name="on_create">True</field>
+        </record>
+        <!--Activity-->
+        <record model="workflow.activity" id="act_draft">
+            <field name="name">Draft</field>
+            <field name="wkf_id" ref="wkf_holiday_planning"/>
+            <!--It is possible to return to draft state, causing the last_apply field nulled-->
+            <field name="action">action_draft()</field>
+            <field name="flow_start">True</field>
+        </record>  
+        <record model="workflow.activity" id="act_apply">
+            <field name="name">Applied</field>
+            <field name="wkf_id" ref="wkf_holiday_planning"/>
+            <field name="kind">stopall</field>
+            <field name="action">action_apply()</field>
+            <field name="flow_stop">True</field>
+        </record>
+        <!--Transition-->
+        <record model="workflow.transition" id="tran_draft_apply">
+            <field name="act_from" ref="act_draft"/>
+            <field name="act_to" ref="act_apply"/>
+            <field name="signal">apply</field>
+        </record>
+        <record model="workflow.transition" id="tran_apply_draft">
+            <field name="act_from" ref="act_apply"/>
+            <field name="act_to" ref="act_draft"/>
+            <field name="signal">draft</field>
+        </record>
+    </data>
+</openerp>

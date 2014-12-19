@@ -12,7 +12,7 @@
 * Delete planning
 	""",
 	'depends': ['base','hr_holidays',],
-	'data': ['views/holiday_planning_view.xml'],	
+	'data': ['views/holiday_planning_view.xml','views/holiday_planning_workflow.xml'],	
     'css': [],
 	'website': 'www.odoo.com',
 	'installable': True

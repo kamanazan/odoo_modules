@@ -18,7 +18,7 @@ class HolidayPlanning(models.Model):
     default_type = fields.Many2one('hr.holidays.status',ondelete='set null',string="Type")
     detail_ids = fields.One2many('holiday.detail','planning_id',string="Details")
     status = fields.Selection([('draft','Draft'),('apply','Applied')])
-    last_apply = fields.Datetime()
+    last_apply = fields.Datetime(readonly=True)
     mode_type = fields.Selection([('tag','By Employee Tag'),('employee','By Employee Name')],default='tag')
     mode_value = fields.Char()#should change based on the choosen mode
     #current_user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
@@ -29,6 +29,14 @@ class HolidayPlanning(models.Model):
     _defaults = {#WTH??
             'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(cr, uid, 'sale.shop', context=c),
         }
+    @api.one
+    def action_draft(self):
+        self.status = 'draft'
+        self.last_apply = None
+    @api.one
+    def action_apply(self):
+        self.status = 'apply'
+        self.last_apply = self.fields.Datetime.now()
 class holiday_detail(models.Model):
     _name='holiday.detail'
     _description="details for each leave type"
