@@ -1,93 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data>
+    <record model="ir.ui.view" id="view_holiday_planning_form">
+        <field name="name">holiday.planning.form</field>
+        <field name="model">holiday.planning</field>
+        <field name="arch" type="xml">
+            <form string="Day-off Planning">
+                <sheet>
+                    <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="default_type"/>
+                        <group col="3" colspan="2">
+                            <group>
+                                <field name="global_start_period" string="Global Period"/>
+                            </group>
+                            <group>
+                                <field name="global_end_period" nolabel="1"/>
+                            </group>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="mode_type"/>
+                        <field name="employee_tag" attrs="{'invisible':[('mode_type','=','employee')]}"/>
+                        <field name="employee_name" attrs="{'invisible':[('mode_type','=','tag')]}"/>
+                        <field name="company_id"/>
+                    </group>
+                </group>
+                <field name="detail_ids">
+                    <tree string="Details">
+                        <field name="start_period"/>
+                        <field name="end_period"/>
+                        <field name="leave_type"/>
+                        <field name="working_day"/>
+                        <field name="description"/>
+                    </tree>
+                </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-<!--Inherit view using XPATH -->
-		<!--<record model="ir.ui.view" id="view_course_inherit">
-			<field name="name">course.inherit</field>
-			<field name="model">openacademy.course</field>
-			<field name="inherit_id" ref="view_openacademy_course_form"/>
-			<field name="arch" type="xml">
-				<xpath expr="//page[@string='session']/field[@name='session_ids']/tree[@string='session']/field[@name='start_date']" position="after">
-					<field name="instructor"/>
-
-				</xpath>
-				<xpath expr="//page[@string='session']/field[@name='session_ids']/from[@string='session']/field[@name='start_date']" position="after">
-					<field name="instructor"/>
-
-				</xpath>
-
-
-			</field> 
-
-
-		</record>-->
-
-<!--filter_domain = ['|',('responsible_id','ilike', 'admin'), ('name','ilike','cour')]-->
-
-		<record model="ir.ui.view" id="view_holiday_planning_form">
-			<field name="name">holiday.planning.form</field>
-			<field name="model">holiday.planning</field>
-			<field name="arch" type="xml">
-				<form string="Day-off Planning">
-					<header>
-						<!--Button-->
-					</header>
-					<sheet>
-						<group>
-							<group>
-								<field name="name"/>
-								<field name="DefaultType"/>
-                                <group>
-                                    <field name="GlobalStartPeriod"/>
-                                    <field name="GlobalEndPeriod"/>
-                                </group>
-								
-							</group>
-							<group>
-								<field name="Mode"/>
-                                
-                                <field name="EmployeeName" attrs="{'invisible':[('Mode','=','tag')]}"/>
-                                <field name="EmployeeTag" attrs="{ 'invisible':[('Mode','=','employee')]}"/>
-
-								<field name="Company"/>
-							</group>
-						</group>
-						
-					</sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" 
-                    	groups="base.group_user"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
-				</form>
-			</field>
-        </record>
-
-		<record model="ir.ui.view" id="view_holiday_planning_tree">
-			<field name="name">holiday.planning.tree</field>
-			<field name="model">holiday.planning</field>
-            <field name="arch" type="xml">
-                <tree string="Day-off Planning">
-                    <field name="name"/>
-                    <field name="DefaultType"/>
-                    <field name="Mode"/>
-                    <field name="GlobalStartPeriod" string="Start Date"/>
-                    <field name="GlobalEndPeriod" string="End Date"/>
-                    <field name="Company"/>
-                </tree>
-            </field>
-        </record>
-		<!--  Action -->
-		<record model="ir.actions.act_window" id="action_holiday_planning">
-			<field name="name">Day-off Planning</field>
-			<field name="res_model">holiday.planning</field>
-			<field name="view_type">tree</field>
-			<field name="view_mode">form,tree</field>
-		</record>
-        <menuitem id="menu_holiday_planning" name="Day-off Planning" parent="hr_holidays.menu_open_ask_holidays" action="action_holiday_planning"/>
-
-
+    <record model="ir.ui.view" id="view_holiday_planning_tree">
+        <field name="name">holiday.planning.tree</field>
+        <field name="model">holiday.planning</field>
+        <field name="arch" type="xml">
+            <tree string="Day-off Planning">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <!--  Action -->
+    <record model="ir.actions.act_window" id="action_holiday_planning">
+        <field name="name">Holiday Planning</field>
+        <field name="res_model">holiday.planning</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form,tree</field>
+    </record>
+    <menuitem id="menu_holiday_planning" name="Holiday Planning" parent="hr_holidays.menu_open_ask_holidays" action="action_holiday_planning" sequence="10"/>
 	</data>
 </openerp>
 
